@@ -1233,7 +1233,7 @@ dindC.gg <- cowplot::plot_grid(
   dind2010.gg + theme(legend.position = "none"),
   dind2019.gg + theme(legend.position = "none"),
   ncol=2,rel_widths = c(1, .89), labels = c(2010, 2019),
-  label_x = c(0.08, 0.75), label_y = c(1.01, 1.01),
+  label_x = c(0.08, 0.77), label_y = c(1.01, 1.01),
   label_size = 16, label_fontfamily = "serif")
 # Add legend
 legend <- get_legend(
