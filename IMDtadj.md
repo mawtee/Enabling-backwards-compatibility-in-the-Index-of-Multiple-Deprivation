@@ -1010,9 +1010,9 @@ IMD_TS.df <- IMD_TS.df %>%
   dplyr::ungroup() %>%
   # Decile rank of interpolated scores (by year)
   dplyr::group_by(year) %>%
-  mutate(IMD_dec_ipol= ntile(IMD_ipol, 10)) %>%
-  mutate(IMD_tadj_dec_ipol = ntile(IMD_tadj_ipol, 10)) %>%
-  arrange(LSOA_code, year) %>%
+  dplyr::mutate(IMD_dec_ipol= ntile(IMD_ipol, 10)) %>%
+  dplyr::mutate(IMD_tadj_dec_ipol = ntile(IMD_tadj_ipol, 10)) %>%
+  dpplyr::arrange(LSOA_code, year) %>%
   dplyr::ungroup()
   head(select(IMD_TS.df, LSOA_code, year, IMD_ipol, IMD_tadj_ipol), 10)
 ```
