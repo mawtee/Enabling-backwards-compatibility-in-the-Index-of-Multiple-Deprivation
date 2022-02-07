@@ -1255,8 +1255,8 @@ dindC.gg <- plot_grid(legend,dindC.gg, nrow =2, rel_heights = c(.175, .8)) +
   draw_label(P3_line_1, x = .4655, y = -0.028, size = 7.5) 
 ```
 
-Figure 3: Bar chart of the 5-year change in time-adjusted IMD score
-versus IMD by year.
+Figure 3: Bar chart of the 5-year change in time-adjusted IMD rank
+versus IMD rank by year.
 
 <img src="IMDtadj_files/figure-gfm/unnamed-chunk-44-1.png" style="display: block; margin: auto auto auto 0;" />
 
