@@ -1197,7 +1197,7 @@ IMD_dif.df$DinD_LEAD_perc <- (IMD_dif.df$change_LEAD_cnt / IMD_dif.df$dec_cnt)*1
 IMD_dif.df <- subset(IMD_dif.df, !is.na(year))
 ```
 
-Create bar chart for 2010 and 2019 scores (I include 2010 only for
+Create bar chart for 2010 and 2019 ranks (I include 2010 only for
 brevity):
 
 ``` r
