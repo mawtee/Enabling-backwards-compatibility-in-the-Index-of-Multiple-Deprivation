@@ -135,6 +135,7 @@ the same across the 2010, 2015 and 2019 indices.
 
 Table 1: By-year comparison of the weighting and underlying indicators
 of five domains of IMD.
+
 <img src="C:/Users/Matt/Documents/Papers/Time Adjusted IMD/Scripts/tab1.jpg" width="100%" style="display: block; margin: auto;" />
 
 Even after accounting for a few minor differences, the weighting and
@@ -334,23 +335,24 @@ resdomC.gg <- cowplot::plot_grid(domresplots[[1]], domresplots[[2]],
                                  domresplots[[5]],nrow=2, 
                                  rel_widths = c(1.115, .94, 
                                                 .94, 1.15, .94)) +
-                       theme(plot.margin = margin(2,2, 8.5,1,"mm"))
+                       theme(plot.margin = margin(2,2, 8.5,3,"mm"))
 
 # Add plot note
 resdomC.gg <- resdomC.gg + 
-  draw_label(P1_line_1, x = .485, y = -0.02, size = 7.5) +
-  draw_label(P1_line_2, x = .1625, y = -0.05, size = 7.5)
+  draw_label(P1_line_1, x = .5, y = -0.02, size = 7.5) +
+  draw_label(P1_line_2, x = .152, y = -0.05, size = 7.5)
 ```
 
 Figure 1: Plot of residuals by domain score.
-<img src="IMDtadj_files/figure-gfm/unnamed-chunk-14-1.png" style="display: block; margin: auto;" />
 
-We can see that in Figure 1 that the model residuals are generally not
-well behaved. The health domain exhibits a classic parabolic curve,
-while a less severe parabola can be seen in the crime domain. Even the
-education and living environment domains exhibit some semblance of
-non-uniformity, with systemic under-prediction occurring at the far end
-of both left and right tails.
+<img src="IMDtadj_files/figure-gfm/unnamed-chunk-14-1.png" style="display: block; margin: auto auto auto 0;" />
+
+We can sEE in Figure 1 that the model residuals are generally not well
+behaved. The health domain exhibits a classic parabolic curve, while a
+less severe parabola can be seen in the crime domain. Even the education
+and living environment domains exhibit some semblance of non-uniformity,
+with systemic under-prediction occurring at the far end of both left and
+right tails.
 
 ### MFP
 
@@ -485,6 +487,7 @@ domreg.tab <- kbl(domreg.mat, align = c(rep("c", 5))) %>%
 ```
 
 Table 2: Table of coefficient for OLS and MFP regressions by year.
+
 <table class=" lightable-classic" style="font-size: 11px; font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;border-bottom: 0;">
 <thead>
 <tr>
@@ -1099,19 +1102,20 @@ meandifC.gg <- cowplot::ggdraw(meandifC.gg) +
            angle = 90, size = 3.88,
            fill = NA, label.color = NA) +
   # Add markdown x-axis title
-  annotate(geom = "richtext", x = .6844, y=.02155, 
+  annotate(geom = "richtext", x = .687, y=.02155, 
            label = "<i>t</i>-adjusted IMD score",
            size = 3.88,
            fill = NA, label.color = NA) +
   # Add plot note
-  theme(plot.margin = margin(2,2, 14,1, "mm")) +
+  theme(plot.margin = margin(2,2, 14,2.5, "mm")) +
   draw_label(P2_line_1, x = .5025, y = -0.0225, size = 7.5) +
   draw_label(P2_line_2, x = .472, y = -0.0465, size = 7.5) +
-  draw_label(P2_line_3, x = .466, y = -0.0725, size = 7.5)
+  draw_label(P2_line_3, x = .472, y = -0.07, size = 7.5)
 ```
 
 Figure 2: Mean difference plot by year.
-<img src="IMDtadj_files/figure-gfm/unnamed-chunk-37-1.png" style="display: block; margin: auto;" />
+
+<img src="IMDtadj_files/figure-gfm/unnamed-chunk-37-1.png" style="display: block; margin: auto auto auto 0;" />
 
 Figure 2 shows that the mean difference between IMD and *t*-adjusted IMD
 score is similar across years; strong evidence of a significant
@@ -1229,7 +1233,7 @@ dindC.gg <- cowplot::plot_grid(
   dind2010.gg + theme(legend.position = "none"),
   dind2019.gg + theme(legend.position = "none"),
   ncol=2,rel_widths = c(1, .89), labels = c(2010, 2019),
-  label_x = c(0.08, 0.78), label_y = c(1.005, 1.005),
+  label_x = c(0.08, 0.75), label_y = c(1.01, 1.01),
   label_size = 16, label_fontfamily = "serif")
 # Add legend
 legend <- get_legend(
@@ -1239,7 +1243,7 @@ legend <- get_legend(
 # Add labels and axis titles
 dindC.gg <- plot_grid(legend,dindC.gg, nrow =2, rel_heights = c(.175, .8)) +
   annotate(geom ="text", label = "IMD",
-           x = .584, y = .952, size = 3.88) +
+           x = .596, y = .964, size = 3.88) +
   annotate(geom = "text", label = "versus change in IMD", 
            x = 0.4945, y=.9175,
            size = 3.88) +
@@ -1253,7 +1257,8 @@ dindC.gg <- plot_grid(legend,dindC.gg, nrow =2, rel_heights = c(.175, .8)) +
 
 Figure 3: Bar chart of the 5-year change in time-adjusted IMD score
 versus IMD by year.
-<img src="IMDtadj_files/figure-gfm/unnamed-chunk-44-1.png" style="display: block; margin: auto;" />
+
+<img src="IMDtadj_files/figure-gfm/unnamed-chunk-44-1.png" style="display: block; margin: auto auto auto 0;" />
 
 Figure 3 shows that there is no difference between IMD rank and
 time-adjusted IMD ranks for a large majority of LSOAs. In line with
