@@ -20,8 +20,8 @@ div.sourceCode {
 }
 </style>
 
-```{r setup, include = FALSE, fig.cap = "", highlight = TRUE, warning = FALSE, message = FALSE, fig.align = "center"}
-knitr::opts_chunk$set(echo = TRUE,fig.cap = "", highlight = TRUE, warning = FALSE, message = FALSE, fig.align = "center")
+```{r setup, include = FALSE, fig.cap = "", highlight = TRUE, warning = FALSE, message = FALSE, fig.align = "left"}
+knitr::opts_chunk$set(echo = TRUE,fig.cap = "", highlight = TRUE, warning = FALSE, message = FALSE, fig.align = "left")
 ```
 ```{r, include = FALSE}
 load("C:/Users/Matt/Documents/Papers/Time Adjusted IMD/Scripts/IMDtadj_space.RData")
@@ -86,9 +86,11 @@ In the first instance, the domains which are comparable across countries vary co
 tab_cap(name = "tab1", caption = ("By-year comparison of the weighting and underlying indicators of five domains of IMD."))
 ```
 `r tab_cap("tab1")`
+
 ```{r, echo=FALSE, out.width = '100%',out.length = '50%',fig.align='center', fig.cap =  ""}
 knitr::include_graphics("C:/Users/Matt/Documents/Papers/Time Adjusted IMD/Scripts/tab1.jpg")
 ```
+
 
 Even after accounting for a few minor differences, the weighting and measurement of these five domains across time is more consistent than that of the income and employment domains across countries (see Table 1). *Prima facie*, time-adjusted IMD can thus be expressed as:
 
@@ -219,29 +221,31 @@ domcount <- 0
 domresplots <- lapply(doms, FUN = residplot.fun, y= "residual")
 ```
 Final combined plot:
-```{r, include = TRUE, echo = TRUE, fig.height=5, fig.align = "center", fig.cap = "Residual plot by domain score"}
+```{r, include = TRUE, echo = TRUE, fig.height=5, fig.align = "left", fig.cap = "Residual plot by domain score"}
 # Combine residual plots
 resdomC.gg <- cowplot::plot_grid(domresplots[[1]], domresplots[[2]],
                                  domresplots[[3]], domresplots[[4]],
                                  domresplots[[5]],nrow=2, 
                                  rel_widths = c(1.115, .94, 
                                                 .94, 1.15, .94)) +
-                       theme(plot.margin = margin(2,2, 8.5,1,"mm"))
+                       theme(plot.margin = margin(2,2, 8.5,3,"mm"))
 
 # Add plot note
 resdomC.gg <- resdomC.gg + 
-  draw_label(P1_line_1, x = .485, y = -0.02, size = 7.5) +
-  draw_label(P1_line_2, x = .1625, y = -0.05, size = 7.5)
+  draw_label(P1_line_1, x = .5, y = -0.02, size = 7.5) +
+  draw_label(P1_line_2, x = .152, y = -0.05, size = 7.5)
 ```
 ``` {r, include = FALSE, echo = FALSE}
 fig_cap(name = "fig1", caption = ("Plot of residuals by domain score."))
 ```
 `r fig_cap("fig1")`
+
 ``` {r, include = TRUE, echo = FALSE}
 resdomC.gg
 ```
 
-We can see that in Figure 1 that the model residuals are generally not well behaved. The health domain exhibits a classic parabolic curve, while a less severe parabola can be seen in the crime domain. Even the education and living environment domains exhibit some semblance of non-uniformity, with systemic under-prediction occurring at the far end of both left and right tails.
+
+We can sEE in Figure 1 that the model residuals are generally not well behaved. The health domain exhibits a classic parabolic curve, while a less severe parabola can be seen in the crime domain. Even the education and living environment domains exhibit some semblance of non-uniformity, with systemic under-prediction occurring at the far end of both left and right tails.
 
 ### MFP 
 I employ the Multivariable Fractional Polynomial procedure to determine the best-fitting functional form for each domain score. A generalization of polynomials, fractional polynomials provide a more flexible class of transformation functions. Although it is true that the inclusion of a simple square polynomial term would lead to a significant reduction in nonlinearity, I prefer the added power of MFP given the paramount importance of model fit in minimizing the influence of time-varying domains.
@@ -350,9 +354,11 @@ domreg.tab <- kbl(domreg.mat, align = c(rep("c", 5))) %>%
 tab_cap(name = "tab2", caption = ("Table of coefficient for OLS and MFP regressions by year."))
 ```
 `r tab_cap("tab2")`
+
 ``` {r, include = TRUE, echo = FALSE}
 domreg.tab
 ```
+
 
 Table 2 compares coefficients and model performance for OLS versus MFP regressions. Across all years, the MFP model provides a substantially better fit than OLS. For IMD 2015, the $R^{2}$ value jumps from 0.928 to 0.962, which amounts to a 50% reduction in the influence of the time-varying income and employment domains from 7.72% to 3.8%. This meets and exceeds the 5% benchmark set by Abel and colleagues. As expected, it is the transformation of the health and crime domains which is the major stimulus of this performance increase. Beta coefficients for these domains are drastically different for MFP as compared to OLS models; the $1^{st}$-degree FP turns negative (capturing the downwards slope on the left-hand side of the parabola), while the the $2^{nd}$-degree FP is positive (capturing the the right-hand side of the curve). Coefficients are highly consistent across years. This is significant because it implies that model residuals are correlated, and that the regression scaling will, *prima facie* , produce reliable results.
 
@@ -616,23 +622,25 @@ meandifC.gg <- cowplot::ggdraw(meandifC.gg) +
            angle = 90, size = 3.88,
            fill = NA, label.color = NA) +
   # Add markdown x-axis title
-  annotate(geom = "richtext", x = .6844, y=.02155, 
+  annotate(geom = "richtext", x = .687, y=.02155, 
            label = "<i>t</i>-adjusted IMD score",
            size = 3.88,
            fill = NA, label.color = NA) +
   # Add plot note
-  theme(plot.margin = margin(2,2, 14,1, "mm")) +
+  theme(plot.margin = margin(2,2, 14,2.5, "mm")) +
   draw_label(P2_line_1, x = .5025, y = -0.0225, size = 7.5) +
   draw_label(P2_line_2, x = .472, y = -0.0465, size = 7.5) +
-  draw_label(P2_line_3, x = .466, y = -0.0725, size = 7.5)
+  draw_label(P2_line_3, x = .472, y = -0.07, size = 7.5)
 ```
 ``` {r, include = FALSE, echo = FALSE}
 fig_cap(name = "fig2", caption = ("Mean difference plot by year."))
 ```
 `r fig_cap("fig2")`
+
 ``` {r, include = TRUE, echo = FALSE, fig.height = 5.75, fig.width = 5.5,}
 meandifC.gg
 ```
+
 
 Figure 2 shows that the mean difference between IMD and *t*-adjusted IMD score is similar across years; strong evidence of a significant correlation between models. This difference is, admittedly, not especially large. Yet there is no reason to expect it to be so. Variation in time-varying domains, while significant enough to warrant adjustment, is not, by any standard, drastic. A low average difference in IMD scores is, in this sense, a further indicator of the validity of the adjusted index. Nevertheless, it is notable that variability is much higher for 2010 scores as compared to 2019. Of course, the implication of this is that the 2010 IMD is substantively different to the 2015 IMD in a way that the 2019 IMD is not. However, it is difficult to reconcile this notion with the fact that differences in domain measurement are actually more pronounced in the 2019 IMD. The most likely explanation is that there is a greater quantiative and/or qualitative difference in the factor weighting of one more domains for 2010 IMD as compared to 2019 IMD. Unfortunately, it is not possible adjust for these differences, since the raw sub-domain scores are not available to the public. Yet given that everything else suggests the adjusted index is broadly robust to temporal differences, additional adjustment on these terms would not likely alter the final index in any meaningful way.
 
@@ -761,7 +769,7 @@ dindC.gg <- cowplot::plot_grid(
   dind2010.gg + theme(legend.position = "none"),
   dind2019.gg + theme(legend.position = "none"),
   ncol=2,rel_widths = c(1, .89), labels = c(2010, 2019),
-  label_x = c(0.08, 0.78), label_y = c(1.005, 1.005),
+  label_x = c(0.08, 0.77), label_y = c(1.01, 1.01),
   label_size = 16, label_fontfamily = "serif")
 # Add legend
 legend <- get_legend(
@@ -771,7 +779,7 @@ legend <- get_legend(
 # Add labels and axis titles
 dindC.gg <- plot_grid(legend,dindC.gg, nrow =2, rel_heights = c(.175, .8)) +
   annotate(geom ="text", label = "IMD",
-           x = .584, y = .952, size = 3.88) +
+           x = .596, y = .964, size = 3.88) +
   annotate(geom = "text", label = "versus change in IMD", 
            x = 0.4945, y=.9175,
            size = 3.88) +
@@ -786,9 +794,11 @@ dindC.gg <- plot_grid(legend,dindC.gg, nrow =2, rel_heights = c(.175, .8)) +
 fig_cap(name = "fig3", caption = ("Bar chart of the 5-year change in time-adjusted IMD score versus IMD by year."))
 ```
 `r fig_cap("fig3")`
+
 ``` {r, include = TRUE, echo = FALSE, fig.height = 4}
 dindC.gg 
 ```
+
 
 Figure 3 shows that there is no difference between IMD rank and time-adjusted IMD ranks for a large majority of LSOAs. In line with Figure 2, there is substantially more movement in 2010 scores compared to 2019. What is of particular interest here, however, is that the adjusted index has nearly zero substantive impact on the least and most deprived LSOAs. And that, conversely, the effect of differences in IMD domain measurement over time is strongest for areas which fall within the middle of the deprivation scale. Together, these findings appear to distinguish three broad strata of relative deprivation levels in England, with two distant poles separating a large and somewhat homogeneous majority. In this model, differences between deprivation levels are relatively small for the majority of areas, and so even minor changes to the measurement of IMD can result in a substantial change in IMD rank. In contrast, differences between deprivation levels at each pole vis-a-vis the majority are comparatively larger, and so this type of small adjustment is highly unlikely to lead to a meaningful difference in interpretation. This type of explanation is, of course, speculative, But it does broadly align with the social class structure described by Great British Class Survey and other studies of social structure in England. 
 
